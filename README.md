@@ -8,3 +8,6 @@ Then just clone the repo and:
 sudo cp kb.sh /usr/bin/kb
 
 After this you will be able to use your keyboard to navegate across clusters and namespaces
+
+## Credits:
+https://unix.stackexchange.com/questions/146570/arrow-key-enter-menu
