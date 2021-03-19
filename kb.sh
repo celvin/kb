@@ -64,11 +64,20 @@ function select_option {
     return $selected
 }
 
+if ! kubie --version COMMAND &> /dev/null
+then
+    echo "You must install kubie first"
+    exit
+fi
+
+unset CLUSTERS
+unset CHOSENCLUSTER
+unset NAMESPACES
+
 echo "Select one option using up/down keys and enter to confirm:"
 echo
 
 CLUSTERS=(`kubie ctx`)
-
 select_option "${CLUSTERS[@]}"
 choice=$?
 
@@ -76,7 +85,6 @@ echo "        CLUSTER = ${CLUSTERS[$choice]}"
 
 kubie ctx ${CLUSTERS[$choice]}
 CHOSENCLUSTER=${CLUSTERS[$choice]}
-
 NAMESPACES=(`kubectl get namespaces | cut -d" " -f 1`)
 select_option "${NAMESPACES[@]}"
 choice=$?
