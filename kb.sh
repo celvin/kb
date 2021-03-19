@@ -73,6 +73,8 @@ fi
 unset CLUSTERS
 unset CHOSENCLUSTER
 unset NAMESPACES
+unset choice
+unset choicename
 
 echo "Select one option using up/down keys and enter to confirm:"
 echo
@@ -87,12 +89,12 @@ kubie ctx ${CLUSTERS[$choice]}
 CHOSENCLUSTER=${CLUSTERS[$choice]}
 NAMESPACES=(`kubectl get namespaces | cut -d" " -f 1`)
 select_option "${NAMESPACES[@]}"
-choice=$?
+choicename=$?
 
 echo "        CLUSTER = ${CHOSENCLUSTER}"
-echo "        NAMESPACE = ${NAMESPACES[$choice]}"
+echo "        NAMESPACE = ${NAMESPACES[$choicename]}"
 
-kubie ctx ${CHOSENCLUSTER} -n ${NAMESPACES[$choice]}
+kubie ctx ${CHOSENCLUSTER} -n ${NAMESPACES[$choicename]}
 
 kubectl get pods
 
